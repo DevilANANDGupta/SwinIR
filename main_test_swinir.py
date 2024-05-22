@@ -43,7 +43,8 @@ def main():
 
     model = define_model(args)
     model.eval()
-    model = model.to(device)
+    # model = model.to(device)
+    model = torch.nn.DataParallel(model, device_ids = [0,1]).to(device)
 
     # setup folder and path
     folder, save_dir, border, window_size = setup(args)
